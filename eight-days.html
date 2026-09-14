@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Eight Days — Four Halls</title>
+  <style>
+    body { margin:0; background:#f7f1e6; color:#1c1712; font-family: Georgia, serif; line-height:1.7; }
+    header, main { max-width:38rem; margin:0 auto; padding:0 1.25rem; }
+    header { padding-top:3rem; }
+    h1 { font-weight:500; font-size:2.2rem; }
+    p.meta { color:#6b6358; }
+    article p { font-size:1.12rem; margin:0 0 1rem; }
+    a { color:#6b6358; }
+  </style>
+</head>
+<body>
+  <header>
+    <p class="meta"><a href="./index.html">Four Halls</a> · reading edition</p>
+    <h1>Eight Days</h1>
+    <p class="meta">One continuous story. Not a stack of loops.</p>
+  </header>
+  <main>
+    <article id="story">Loading the hall…</article>
+  </main>
+  <script>
+    const parts = [
+      "parts/part-01.txt","parts/part-02.txt","parts/part-03.txt","parts/part-04.txt",
+      "parts/part-05.txt","parts/part-06.txt","parts/part-07.txt","parts/part-08.txt"
+    ];
+    Promise.all(parts.map(p => fetch(p).then(r => r.ok ? r.text() : "")))
+      .then(texts => {
+        const article = document.getElementById("story");
+        article.innerHTML = "";
+        texts.join("\n\n").split(/\n\n+/).forEach(block => {
+          if (!block.trim()) return;
+          const p = document.createElement("p");
+          p.textContent = block.trim();
+          article.appendChild(p);
+        });
+      });
+  </script>
+</body>
+</html>
