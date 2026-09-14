@@ -1,2 +1,5 @@
-# four-halls
-Four Halls reading edition. No Grok. No IUL.
+# Four Halls
+
+Reading edition. No Grok. No IUL.
+
+Open `index.html` and `eight-days.html`.
